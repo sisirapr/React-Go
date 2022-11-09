@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 export default class AppContent extends Component {
 
-    state = {posts: []};
-
     constructor(props) {
         super(props);
         this.handlePostChange = this.handlePostChange.bind(this);
@@ -18,7 +16,6 @@ export default class AppContent extends Component {
         fetch('https://jsonplaceholder.typicode.com/posts')
             .then((response) => response.json())
             .then(json => { 
-                this.setState({posts: json});
                 this.handlePostChange(json);
             })
     }
@@ -37,10 +34,10 @@ export default class AppContent extends Component {
                 <button onClick={this.fetchList} className="btn btn-primary" href='#'>Fetch Data</button>
                 <hr />
 
-                <p>Posts is {this.state.posts.length} items long</p>
+                <p>Posts is {this.props.posts.length} items long</p>
 
                 <ul>
-                    {this.state.posts.map((c) => (
+                    {this.props.posts.map((c) => (
                         <li key={c.id}>
                             <a href="#!" onClick={() => this.clickedItem(c.id)}>
                                 {c.title}
